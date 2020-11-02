@@ -21,6 +21,12 @@ jobs:
       - name: Build ⚒️
         run: npm run build
 
+      - name: Archive build 📚
+        uses: actions/upload-artifact@v2
+        with:
+          name: unioviscope-web-dist
+          path: dist
+
       - name: Deploy to Heroku 🚓
         uses: akhileshns/heroku-deploy@v3.5.6
         with:
