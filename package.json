@@ -59,6 +59,7 @@
         "protractor": "~5.1.1",
         "rimraf": "^2.5.4",
         "tslint": "^5.1.0",
+        "typedoc": "0.14.2",
         "typescript": "~2.2.2"
     }
 }
