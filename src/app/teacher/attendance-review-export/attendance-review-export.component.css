@@ -1,0 +1,34 @@
+.attendance-review-wrapper {
+    background: white;
+    border-radius: 4px;
+    margin: 0 auto;
+    padding: 15px 0;
+    width: 83.33%;
+}
+
+.attendance-review-export-wrapper {
+    width: 100%;
+}
+
+.attendance-review-export-wrapper:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.clearfix {
+    margin-bottom: 15px;
+}
+
+.form-centered {
+    text-align: center;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.table-footer-buttons-wrapper {
+    text-align: center;
+    padding-top: 15px;
+}

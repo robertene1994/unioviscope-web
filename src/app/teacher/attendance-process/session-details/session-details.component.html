@@ -1,0 +1,66 @@
+<teacher></teacher>
+<div class="session-details-wrapper">
+    <div class="session-details-content">
+        <div class="session-details-form-wrapper">
+            <div class="session-details-group">
+                <label>Sesión: </label>
+                <span class="pull-right">{{ session.id }}</span>
+            </div>
+            <div class="session-details-group">
+                <label>Grupo: </label> <span class="pull-right">{{ session.group.code }}</span>
+            </div>
+            <div class="session-details-group">
+                <label>Asignatura: </label> <span class="pull-right">{{ session.group.subject.subject.denomination }}</span>
+            </div>
+            <div class="session-details-group">
+                <label>Tipo: </label>
+                <span class="pull-right" *ngIf="session.group.type === 'PRACTICE'">Práctica</span>
+                <span class="pull-right" *ngIf="session.group.type === 'THEORY'">Teoría</span>
+                <span class="pull-right" *ngIf="session.group.type === 'SEMINAR'">Seminario</span>
+                <span class="pull-right" *ngIf="session.group.type === 'GROUP_TUTORSHIP'">Tutoría Grupal</span>
+            </div>
+            <div class="session-details-group">
+                <label>Descripción: </label>
+                <span class="pull-right">
+                    <input class="form-element" type="text" pInputText [(ngModel)]="currentDescription" required />
+                </span>
+            </div>
+            <div class="session-details-group">
+                <label>Fecha/Hora inicio: </label>
+                <span class="pull-right calendar-style">
+                    <p-calendar [(ngModel)]="startDate" [locale]="locale" [showTime]="true" dateFormat="dd/mm/yy" [monthNavigator]="true"
+                        [stepMinute]=15 showIcon="true" readonlyInput="true"></p-calendar>
+                </span>
+            </div>
+            <div class="session-details-group">
+                <label>Fecha/Hora fin: </label>
+                <span class="pull-right calendar-style">
+                    <p-calendar [(ngModel)]="endDate" [locale]="locale" [showTime]="true" dateFormat="dd/mm/yy" [monthNavigator]="true"
+                        [stepMinute]=15 showIcon="true" readonlyInput="true"></p-calendar>
+                </span>
+            </div>
+            <div class="session-details-group">
+                <label>Lugar: </label>
+                <span class="pull-right">
+                    <p-dropdown [options]="locationsSI" [(ngModel)]="session.location" [filter]="true" autoWidth="false" placeholder="Lugar"
+                        [style]="{'width':'196px'}"></p-dropdown>
+                </span>
+            </div>
+        </div>
+        <div class="session-details-group session-details-group-centered">
+            <div class="pull-left">
+                <button (click)="goBack()" class="btn btn-default btn-theme" type="button" pButton icon="fa-arrow-left" label="Atrás"></button>
+            </div>
+            <div class="inline-block">
+                <button [disabled]="createOrUpdateSessionButtonState()" (click)="createSession()" class="btn btn-default btn-theme" type="button"
+                    pButton icon="fa-plus" label="Crear Sesión"></button>
+                <button [disabled]="createOrUpdateSessionButtonState()" (click)="updateSession()" class="btn btn-default btn-theme" type="button"
+                    pButton icon="fa-save" label="Guardar Cambios"></button>
+            </div>
+            <div class="pull-right">
+                <button [disabled]="openAttendanceProcessButtonState()" (click)="openAttendanceProcess()" class="btn btn-default btn-theme"
+                    type="button" pButton icon="fa-play" label="Abrir Proceso"></button>
+            </div>
+        </div>
+    </div>
+</div>

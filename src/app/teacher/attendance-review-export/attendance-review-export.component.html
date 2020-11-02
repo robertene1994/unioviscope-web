@@ -1,0 +1,130 @@
+<teacher></teacher>
+<div class="attendance-review-wrapper">
+    <div class="attendance-review-export-wrapper">
+        <div class="col-md-6">
+            <div class="clearfix">
+                <div class="col-md-4">
+                    <p-dropdown [options]="formatsSI" [(ngModel)]="selectedFormat" [filter]="true" required autoWidth="false"
+                        [style]="{'width':'100%'}" placeholder="Formato"></p-dropdown>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="col-md-4">
+                    <p-dropdown [options]="subjectsSI" [(ngModel)]="selectedSubject" [filter]="true" required autoWidth="false"
+                        [style]="{'width':'100%'}" placeholder="Asignatura" (onChange)="getGroups()"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <p-dropdown [options]="groupsSI" [(ngModel)]="selectedGroup" [filter]=true required autoWidth=false [style]="{'width':'100%'}"
+                        placeholder="Grupo" (onChange)="getSessions()"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <p-dropdown [options]="sessionsSI" [(ngModel)]="selectedSession" [filter]=true required autoWidth=false [style]="{'width':'100%'}"
+                        placeholder="Sesión"></p-dropdown>
+                </div>
+            </div>
+            <div class="form-centered">
+                <div class="inline-block">
+                    <button [disabled]="getAttendancesButtonState()" (click)="getAttendances()" class="btn btn-default btn-theme" type="button"
+                        pButton icon="fa-search" label="Consultar"></button>
+                    <button [disabled]="exportAttendancesButtonState()" (click)="exportAttendances()" class="btn btn-default btn-theme" type="button"
+                        pButton icon="fa-download" label="Exportar"></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align: left">
+                    <label>Importar asistencias</label>
+                    <button (click)="showFormatDialog()" class="btn btn-default btn-theme" type="button" pButton icon="fa-file-text"
+                        label="Formato"></button>
+                </div>
+                <p-fileUpload [name]="fileName" [url]="url" chooseLabel="Seleccionar fichero..." uploadLabel="Subir" cancelLabel="Cancelar"
+                    (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" accept="text/csv"></p-fileUpload>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 scrollable-table-wrapper">
+        <p-dataTable [value]="attendances" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,15,20]" [editable]="true"
+            scrollable="true" scrollHeight="361px" emptyMessage="No se han cargado asistencias">
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column header="Estudiante" colspan="5"></p-column>
+                    <p-column header="Asistencia" colspan="5"></p-column>
+                </p-row>
+                <p-row>
+                    <p-column field="student.lastName" header="Apellidos" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains"></p-column>
+                    <p-column field="student.firstName" header="Nombre" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains"></p-column>
+                    <p-column field="student.userName" header="UO" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains"></p-column>
+                    <p-column field="student.dni" header="DNI" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains"></p-column>
+                    <p-column field="student.studentGroup.group.code" header="Grupo Natural" [sortable]="true" [filter]="true"
+                        filterPlaceholder="Buscar" filterMatchMode="contains">
+                        <template let-col let-attendance="rowData" pTemplate="body">
+                            <span *ngIf="attendance.student.studentGroup === null">Sin grupo asignado</span>
+                            <span *ngIf="attendance.student.studentGroup">{{attendance.student.studentGroup.group.code}}</span>
+                        </template>
+                    </p-column>
+                    <p-column field="confirmed" header="Confirmado" [sortable]="true"></p-column>
+                    <p-column field="date" header="Fecha de Confirmación" [sortable]="true"></p-column>
+                    <p-column field="comment" header="Comentario" [sortable]="true" [editable]="false"></p-column>
+                    <p-column field="faceRecognitionOff" header="Empleo del Reconocimiento Facial" [sortable]="true" [editable]="false"></p-column>
+                    <p-column field="session.group.code" header="Grupo de la Asistencia" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains"></p-column>
+                </p-row>
+            </p-headerColumnGroup>
+            <p-column field="student.lastName"></p-column>
+            <p-column field="student.firstName"></p-column>
+            <p-column field="student.userName"></p-column>
+            <p-column field="student.dni"></p-column>
+            <p-column field="student.studentGroup.group.code">
+                <template let-col let-attendance="rowData" pTemplate="body">
+                    <span *ngIf="attendance.student.studentGroup === null">Sin grupo asignado</span>
+                    <span *ngIf="attendance.student.studentGroup">{{attendance.student.studentGroup.group.code}}</span>
+                </template>
+            </p-column>
+            <p-column field="confirmed">
+                <template let-col let-attendance="rowData" pTemplate="item">
+                    <p-checkbox [(ngModel)]="attendance[col.field]" binary="true" [disabled]="attendance.comment.length===0"
+                        (onChange)="modifyAttendance(attendance)"></p-checkbox>
+                </template>
+            </p-column>
+            <p-column field="date">
+                <template let-col let-attendance="rowData" pTemplate="body">
+                    {{attendance[col.field] | date:'dd/MM/yyyy HH:mm' }}
+                </template>
+            </p-column>
+            <p-column field="comment">
+                <template let-col let-attendance="rowData" pTemplate="body">
+                    <input [(ngModel)]="attendance[col.field]" [disabled]="modifiedAttendances.indexOf(attendance)!==-1" type="text" pInputText
+                        style="width: 100%" />
+                </template>
+            </p-column>
+            <p-column field="faceRecognitionOff">
+                <template let-col let-attendance="rowData" pTemplate="body">
+                    <p-checkbox [(ngModel)]="!attendance[col.field]" binary="true" [disabled]="true"></p-checkbox>
+                </template>
+            </p-column>
+            <p-column field="session.group.code"></p-column>
+        </p-dataTable>
+    </div>
+    <div class="table-footer-buttons-wrapper">
+        <button [disabled]="updateAttendancesButtonState()" (click)="updateAttendances()" class="btn btn-default btn-theme" type="button" pButton
+            icon="fa-save" label="Guardar Cambios"></button>
+    </div>
+</div>
+<p-dialog header="Formato del fichero de importación de asistencias" [(visible)]="displayFormat" modal="true" width="auto" [responsive]="true">
+    <ul>
+        <li>El fichero de importación debe tener formato CSV.</li>
+        <li>La cabecera del fichero debe ser como sigue: <strong>user-name, session-id</strong></li>
+        <li>Cada asistencia a crear debe estar en una fila independiente.</li>
+        <li>Todas las columnas deben estar separadas por comas tanto en las filas como en la cabecera del fichero.</li>
+    </ul>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton class="btn btn-default btn-theme" icon="fa-check" (click)="hideFormatDialog()" label="Aceptar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

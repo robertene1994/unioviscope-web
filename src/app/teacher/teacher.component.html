@@ -1,0 +1,18 @@
+<div class="welcome-message" *ngIf="loginService.isUserLoggedIn()">
+    <h4><span class="fa fa-user" aria-hidden="true"></span>{{user.lastName}}, {{user.firstName}}</h4>
+</div>
+<div class="col-md-6 teacher-menu-wrapper">
+    <ul class="nav nav-tabs nav-justified">
+        <li [class.active]="router.url==='/attendanceProcess' || router.url.startsWith('/sessionDetails') || router.url.startsWith('/qrCodeProcess')">
+            <a routerLink="/attendanceProcess">
+                <span class="fa fa-cogs"></span> Configuración y Apertura del Control de Presencia
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/attendanceReviewExport">
+                <span class="fa fa-list-ul"></span> Revisión, Importación y Exportación de Asistencias
+            </a>
+        </li>
+    </ul>
+</div>
+<router-outlet></router-outlet>

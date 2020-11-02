@@ -1,0 +1,26 @@
+<div class="col-md-2 login-wrapper">
+    <img class="logo" src="/assets/logo.png">
+    <h2 i18n>Inicio Sesión</h2>
+    <form novalidate>
+        <div class="form-group">
+            <input type="text" class="form-control primary" name="userName" [(ngModel)]="account.userName"
+                placeholder="UserName" required />
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" [(ngModel)]="account.password" placeholder="Password"
+                required />
+        </div>
+        <div class="form-group">
+            <button [disabled]="logInButtonState()" (click)="logIn()" class="btn btn-default btn-theme" i18n>Iniciar
+                Sesión</button>
+        </div>
+        <div>
+            Credenciales para probar la aplicación:
+            <p>
+                <b>Teacher</b>: omar / omar
+                <br>
+                <b>Admin</b>: admin / admin
+            </p>
+        </div>
+    </form>
+</div>

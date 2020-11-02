@@ -1,0 +1,56 @@
+.session-details-wrapper {
+    text-align: center;
+    padding: 0 50px;
+}
+
+.session-details-content {
+    background: white;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 20px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.session-details-content:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.session-details-group {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.session-details-form-wrapper {
+    margin: 0 auto;
+    width: 360px;
+}
+
+.session-details-group:last-child {
+    margin-bottom: 0;
+}
+
+.session-details-group>.switch-label {
+    line-height: 30px;
+    margin: 0;
+    vertical-align: bottom;
+}
+
+.form-element {
+    width: 196px;
+}
+
+.calendar-style {
+    width: 196px;
+}
+
+.session-details-group-centered {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.inline-block {
+    display: inline-block;
+}

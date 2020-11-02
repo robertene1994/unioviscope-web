@@ -1,0 +1,56 @@
+<teacher></teacher>
+<div class="side-menu">
+    <div class="side-menu-arrow">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </div>
+    <div>
+        <h3>Opciones Códigos QR</h3>
+        <div>
+            <label>Tamaño Centro: </label>
+            <input type="range" [(ngModel)]="centerSize" [min]="50" [max]="100" [step]="1" animate="true" class="enabled" />
+        </div>
+        <br>
+        <div>
+            <label>Perspectivas: </label>
+            <p-checkbox [(ngModel)]="isQrPerspective" binary="true"></p-checkbox>
+        </div>
+        <div>
+            <label>Inclinación Izquierda: </label>
+            <input type="range" [(ngModel)]="leftTilt" [disabled]="!isQrPerspective" [min]="50" [max]="100" [step]="1"
+                [class.enabled]="isQrPerspective" [class.disabled]="!isQrPerspective" />
+        </div>
+        <div>
+            <label>Inclinación Hacia Arriba: </label>
+            <input type="range" [(ngModel)]="upTilt" [disabled]="!isQrPerspective" [min]="60" [max]="100" [step]="1" [class.enabled]="isQrPerspective"
+                [class.disabled]="!isQrPerspective" />
+        </div>
+        <div>
+            <label>Inclinación Derecha: </label>
+            <input type="range" [(ngModel)]="rightTilt" [disabled]="!isQrPerspective" [min]="50" [max]="100" [step]="1"
+                [class.enabled]="isQrPerspective" [class.disabled]="!isQrPerspective" />
+        </div>
+    </div>
+    <div>
+        <h3>Estadísticas</h3>
+        <label>Asistencias: </label> {{ attendancesNo }}
+    </div>
+    <div>
+        <button (click)="stopQrCodeProcess()" class="btn btn-danger btn-close">Cerrar Proceso</button>
+    </div>
+</div>
+<div class="qrs-wrapper">
+    <div class="qr-main text-center">
+        <img [src]="qrCode " *ngIf="qrCode" [style]="centerPerspective() " />
+    </div>
+    <div *ngIf="isQrPerspective ">
+        <div class="image-perspective text-center">
+            <img [src]="qrCode " *ngIf="qrCode " [style]="leftPerspective() " />
+        </div>
+        <div class="image-perspective text-center">
+            <img [src]="qrCode " *ngIf="qrCode " [style]="upPerspective() " />
+        </div>
+        <div class="image-perspective text-center">
+            <img [src]="qrCode " *ngIf="qrCode " [style]="rightPerspective() " />
+        </div>
+    </div>
+</div>

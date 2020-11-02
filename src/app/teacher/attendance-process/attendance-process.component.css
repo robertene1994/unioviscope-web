@@ -1,0 +1,33 @@
+.attendance-process-wrapper {
+    text-align: center;
+    padding: 0 50px;
+}
+
+.attendance-process-content {
+    background: white;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 20px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.attendance-process-content:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.attendance-process-group {
+    margin: 20px 0;
+}
+
+.attendance-process-group:last-child {
+    margin-bottom: 0;
+}
+
+.attendance-process-group>.switch-label {
+    line-height: 30px;
+    margin: 0;
+    vertical-align: bottom;
+}

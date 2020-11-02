@@ -1,0 +1,47 @@
+<admin></admin>
+
+<div class="content-admin-wrapper">
+    <div class="content-admin-scrollable">
+        <div class="box table-wrapper">
+            <div class="scrollable-table-wrapper">
+                <p-dataTable [value]="courses" [(selection)]="selectedCourse" selectionMode="single" [rows]="10" [paginator]="true" [pageLinks]="5"
+                    [rowsPerPageOptions]="[10,15,20]" [editable]="false" scrollable="true" scrollHeight="361px"
+                    emptyMessage="No se han cargado cursos académicos">
+                    <p-headerColumnGroup>
+                        <p-row>
+                            <p-column header="Curso" colspan="1"></p-column>
+                            <p-column header="Plan de Estudios" colspan="2"></p-column>
+                        </p-row>
+                        <p-row>
+                            <p-column field="course.year" header="Curso Académico" [sortable]="true" [filter]="true"
+                                filterPlaceholder="Buscar (año de inicio del curso)" filterMatchMode="contains"></p-column>
+                            <p-column field="subject.syllabus.code" header="Código" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="subject.syllabus.denomination" header="Denominación" [sortable]="true" [filter]="true"
+                                filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+                        </p-row>
+                    </p-headerColumnGroup>
+                    <p-column field="course.year">
+                        <template let-col let-course="rowData" pTemplate="body">
+                            {{course.course.year}} - {{course.course.year + 1}}
+                        </template>
+                    </p-column>
+                    <p-column field="subject.syllabus.code"></p-column>
+                    <p-column field="subject.syllabus.denomination"></p-column>
+                </p-dataTable>
+            </div>
+            <div class="buttons-admin-wrapper">
+                <button [disabled]="deleteCourseButtonState()" (click)="deleteLastCourse()" class="btn btn-default btn-theme" type="button" pButton
+                    icon="fa-trash" label="Eliminar"></button>
+                <button (click)="showDialogCreateNextCourse()" class="btn btn-default btn-theme" type="button" pButton icon="fa-plus"
+                    label="Crear"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<p-confirmDialog #confirmDialog modal="true" width="750" icon="fa fa-question-circle" [responsive]="true">
+    <p-footer>
+        <button type="button" pButton class="btn btn-default btn-theme" icon="fa-times" (click)="confirmDialog.reject()" label="Cancelar"></button>
+        <button type="button" pButton class="btn btn-default btn-theme" icon="fa-check" (click)="confirmDialog.accept()" label="Aceptar"></button>
+    </p-footer>
+</p-confirmDialog>

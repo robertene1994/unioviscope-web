@@ -1,0 +1,20 @@
+.welcome-message {
+    float: right;
+    margin-right: 14px;
+}
+
+.welcome-message .fa {
+    margin-right: 10px;
+}
+
+.teacher-menu-wrapper {
+    background: #d6d6d6;
+    border-radius: 4px;
+    float: none !important;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.teacher-menu-wrapper>ul>li>a {
+    color: #555 !important;
+}

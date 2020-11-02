@@ -1,0 +1,94 @@
+<admin></admin>
+<div class="content-admin-wrapper">
+    <div class="content-admin-scrollable">
+        <div class="box import-wrapper">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align: left">
+                    <label>Importar docentes a grupos</label>
+                    <button (click)="showFormatDialog()" class="btn btn-default btn-theme" type="button" pButton icon="fa-file-text"
+                        label="Formato"></button>
+                </div>
+                <p-fileUpload [name]="fileName" [url]="url" chooseLabel="Seleccionar fichero..." uploadLabel="Subir" cancelLabel="Cancelar"
+                    (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" accept="text/csv"></p-fileUpload>
+            </div>
+        </div>
+        <div class="box table-wrapper">
+            <div class="scrollable-table-wrapper">
+                <p-dataTable [value]="teacherGroups" [(selection)]="selectedTeacherGroup" selectionMode="single" [rows]="10" [paginator]="true"
+                    [pageLinks]="5" [rowsPerPageOptions]="[10,15,20]" [editable]="false" scrollable="true" scrollHeight="361px"
+                    emptyMessage="No se han cargado grupos de docentes">
+                    <p-headerColumnGroup>
+                        <p-row>
+                            <p-column header="Docente" colspan="3"></p-column>
+                            <p-column header="Grupo" colspan="3"></p-column>
+                            <p-column header="Curso Académico" colspan="1"></p-column>
+                            <p-column header="Asignatura" colspan="2"></p-column>
+                        </p-row>
+                        <p-row>
+                            <p-column field="teacher.userName" header="Nombre de usuario" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="teacher.firstName" header="Nombre" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="teacher.lastName" header="Apellidos" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="group.id" header="Id" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="group.code" header="Código" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="group.type" header="Tipo" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="group.subject.course.year" header="Curso" [sortable]="true" [filter]="true"
+                                filterPlaceholder="Buscar (año de inicio del curso)" filterMatchMode="contains"></p-column>
+                            <p-column field="group.subject.subject.code" header="Código" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                                filterMatchMode="contains"></p-column>
+                            <p-column field="group.subject.subject.denomination" header="Asignatura" [sortable]="true" [filter]="true"
+                                filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+                        </p-row>
+                    </p-headerColumnGroup>
+                    <p-column field="teacher.userName"></p-column>
+                    <p-column field="teacher.firstName"></p-column>
+                    <p-column field="teacher.lastName"></p-column>
+                    <p-column field="group.id"></p-column>
+                    <p-column field="group.code"></p-column>
+                    <p-column field="group.type">
+                        <template let-col let-teacherGroup="rowData" pTemplate="body">
+                            <span *ngIf="teacherGroup.group.type === 'THEORY'">Teoría</span>
+                            <span *ngIf="teacherGroup.group.type === 'PRACTICE'">Práctica</span>
+                            <span *ngIf="teacherGroup.group.type === 'SEMINAR'">Seminario</span>
+                            <span *ngIf="teacherGroup.group.type === 'GROUP_TUTORSHIP'">Tutoría Grupal</span>
+                        </template>
+                    </p-column>
+                    <p-column field="group.subject.course.year">
+                        <template let-col let-teacherGroup="rowData" pTemplate="body">
+                            {{teacherGroup.group.subject.course.year}} - {{teacherGroup.group.subject.course.year + 1}}
+                        </template>
+                    </p-column>
+                    <p-column field="group.subject.subject.code"></p-column>
+                    <p-column field="group.subject.subject.denomination"></p-column>
+                </p-dataTable>
+            </div>
+            <div class="buttons-admin-wrapper">
+                <button [disabled]="deleteOrUpdateTeacherGroupButtonState()" (click)="deleteTeacherGroup()" class="btn btn-default btn-theme"
+                    type="button" pButton icon="fa-trash" label="Eliminar"></button>
+                <button [disabled]="deleteOrUpdateTeacherGroupButtonState()" (click)="updateTeacherGroup()" class="btn btn-default btn-theme"
+                    type="button" pButton icon="fa-pencil" label="Modificar"></button>
+                <button (click)="createTeacherGroup()" class="btn btn-default btn-theme" type="button" pButton icon="fa-plus"
+                    label="Asignar"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog header="Formato del fichero de importación de asignación de docentes a grupos" [(visible)]="displayFormat" modal="true" width="auto"
+    [responsive]="true">
+    <ul>
+        <li>El fichero de importación debe tener formato CSV.</li>
+        <li>La cabecera del fichero debe ser como sigue: <strong>user-name, group-id</strong></li>
+        <li>Cada asignación de docente a grupo debe estar en una fila independiente.</li>
+        <li>Todas las columnas deben estar separadas por comas tanto en las filas como en la cabecera del fichero.</li>
+    </ul>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton class="btn btn-default btn-theme" icon="fa-check" (click)="hideFormatDialog()" label="Aceptar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

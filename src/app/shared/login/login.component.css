@@ -1,0 +1,24 @@
+.login-wrapper {
+    background: white;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px 0 rgba(75, 75, 75, 0.4);
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.login-wrapper>.logo {
+    margin: 0 auto;
+    margin-top: 25px;
+    width: 75%;
+}
+
+.login-wrapper>h2 {
+    margin-bottom: 25px;
+}
+
+.login-wrapper .form-group>button {
+    width: 100%;
+}

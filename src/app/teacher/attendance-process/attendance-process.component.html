@@ -1,0 +1,22 @@
+<teacher></teacher>
+<div class="attendance-process-wrapper">
+    <div class="attendance-process-content">
+        <div class="attendance-process-group text-left">
+            <label class="switch-label">Mostrar solo sesiones en curso: </label>
+            <p-inputSwitch [(ngModel)]="isOngoingSesions" onLabel="Si" offLabel="No" [disabled]="ongoingSessionsSwitchState()"
+                (onChange)="showSessionsForSwitch()"></p-inputSwitch>
+        </div>
+        <div class="attendance-process-group">
+            <p-dropdown [options]="subjectsSI" [(ngModel)]="selectedSubject" [filter]="true" required autoWidth="false" [style]="{'width':'220px'}"
+                placeholder="Asignatura" (onChange)="getGroups()"></p-dropdown>
+            <p-dropdown [options]="groupsSI" [(ngModel)]="selectedGroup" [filter]=true required autoWidth=false [style]="{'width':'220px'}"
+                placeholder="Grupo" (onChange)="getSessions()"></p-dropdown>
+            <p-dropdown [options]="sessionsSI" [(ngModel)]="selectedSession" [filter]=true required autoWidth=false [style]="{'width':'220px'}"
+                placeholder="Sesión"></p-dropdown>
+        </div>
+        <div class="attendance-process-group text-right">
+            <button [disabled]="forwardButtonState()" (click)="goForward()" class="btn btn-default btn-theme" type="button" pButton
+                icon="fa-arrow-right" label="Siguiente"></button>
+        </div>
+    </div>
+</div>

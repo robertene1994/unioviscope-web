@@ -1,0 +1,26 @@
+.top-bar {
+    background: linear-gradient(180deg, rgba(25, 25, 25, 0.2), rgba(0, 0, 0, 0));
+    height: 60px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.top-bar>h1 {
+    line-height: 60px;
+    margin: 0;
+}
+
+.top-bar-options {
+    font-size: 1.2em;
+    position: absolute;
+    right: 14px;
+    /*(60px - 32px) / 2*/
+    top: 14px;
+}
+
+.top-bar:after {
+    clear: both;
+    content: '';
+    display: block;
+}
