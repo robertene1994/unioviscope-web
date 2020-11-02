@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var environment_1 = require("../environments/environment");
+exports.apiUrl = environment_1.environment.apiUrl;
+exports.apiUrlCommon = exports.apiUrl + '/common';
+exports.apiUrlAdmin = exports.apiUrl + '/admin';
+exports.apiUrlTeacher = exports.apiUrl + '/teacher';
+exports.apiUrlSyllabus = exports.apiUrl + '/syllabus';
+exports.apiUrlSubject = exports.apiUrl + '/subject';
+exports.apiUrlCourse = exports.apiUrl + '/course';
+exports.apiUrlCourseSubject = exports.apiUrl + '/courseSubject';
+exports.apiUrlGroup = exports.apiUrl + '/group';
+exports.apiUrlTeachers = exports.apiUrl + '/teachers';
+exports.apiUrlStudents = exports.apiUrl + '/students';
+exports.apiUrlSession = exports.apiUrl + '/session';
+exports.apiUrlTeacherGroup = exports.apiUrl + '/teacherGroup';
+exports.apiUrlStudentGroup = exports.apiUrl + '/studentGroup';
+exports.apiUrlAttendance = exports.apiUrl + '/attendance';
+exports.serviceTimeOutMillis = 5000;
+exports.defaultLocale = 'es-ES';
+exports.maxErrorsShown = 7;
+exports.showErrorTimeIntervalSeconds = 5;
+exports.qrCodeRequestIntervalSeconds = 5;
+exports.attendancesNoRequestIntervalSeconds = 3;
+//# sourceMappingURL=app.config.js.map

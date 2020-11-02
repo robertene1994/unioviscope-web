@@ -1,0 +1,8 @@
+<p-growl [value]="messages" [life]="showErrorTime"></p-growl>
+<div class="top-bar">
+    <div class="top-bar-options">
+        <!--<p-dropdown [options]="languages" [(ngModel)]="selectedLocale" (onChange)="changeLanguage($event)"></p-dropdown>-->
+        <button *ngIf="loginService.isUserLoggedIn()" (click)="logOut()" class="btn btn-danger" i18n>Cerrar Sesión</button>
+    </div>
+</div>
+<router-outlet></router-outlet>

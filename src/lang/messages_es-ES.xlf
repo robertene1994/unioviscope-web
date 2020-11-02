@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="es" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="93491dbc422da2754ba6937a4e757196996fa4c6" datatype="html">
+        <source>Cerrar Sesión</source>
+        <target>Cerrar Sesión</target>
+      </trans-unit>
+      <trans-unit id="05e2ca8ebb0d1f87fdd250e7005911a08d5c8402" datatype="html">
+        <source>Inicio Sesión</source>
+        <target>Inicio Sesión</target>
+      </trans-unit>
+      <trans-unit id="656864832cc2c37106aaa75d9fe345bd879508c5" datatype="html">
+        <source>Iniciar Sesión</source>
+        <target>Iniciar Sesión</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

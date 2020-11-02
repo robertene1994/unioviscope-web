@@ -1,0 +1,58 @@
+<admin></admin>
+<div class="content-admin-wrapper">
+    <div class="content-admin-scrollable">
+        <div class="box import-wrapper">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align: left">
+                    <label>Importar docentes</label>
+                    <button (click)="showFormatDialog()" class="btn btn-default btn-theme" type="button" pButton icon="fa-file-text"
+                        label="Formato"></button>
+                </div>
+                <p-fileUpload [name]="fileName" [url]="url" chooseLabel="Seleccionar fichero..." uploadLabel="Subir" cancelLabel="Cancelar"
+                    (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" accept="text/csv"></p-fileUpload>
+            </div>
+        </div>
+        <div class="box table-wrapper">
+            <div class="scrollable-table-wrapper">
+                <p-dataTable [value]="teachers" [(selection)]="selectedTeacher" selectionMode="single" [rows]="10" [paginator]="true" [pageLinks]="5"
+                    [rowsPerPageOptions]="[10,15,20]" [editable]="false" scrollable="true" scrollHeight="361px"
+                    emptyMessage="No se han cargado docentes">
+                    <p-column field="userName" header="Nombre de usuario" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains" [style]="{'width':'20%'}"></p-column>
+                    <p-column field="password" header="Contraseña" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains" [style]="{'width':'20%'}">
+                        <template let-col let-course="rowData" pTemplate="body">
+                            ******
+                        </template>
+                    </p-column>
+                    <p-column field="dni" header="DNI" [sortable]="true" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"
+                        [style]="{'width':'20%'}"></p-column>
+                    <p-column field="firstName" header="Nombre" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains" [style]="{'width':'20%'}"></p-column>
+                    <p-column field="lastName" header="Apellidos" [sortable]="true" [filter]="true" filterPlaceholder="Buscar"
+                        filterMatchMode="contains" [style]="{'width':'20%'}"></p-column>
+                </p-dataTable>
+            </div>
+            <div class="buttons-admin-wrapper">
+                <button [disabled]="deleteOrUpdateTeacherButtonState()" (click)="deleteTeacher()" class="btn btn-default btn-theme" type="button"
+                    pButton icon="fa-trash" label="Eliminar"></button>
+                <button [disabled]="deleteOrUpdateTeacherButtonState()" (click)="updateTeacher()" class="btn btn-default btn-theme" type="button"
+                    pButton icon="fa-pencil" label="Modificar"></button>
+                <button (click)="createTeacher()" class="btn btn-default btn-theme" type="button" pButton icon="fa-plus" label="Crear"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog header="Formato del fichero de importación de docentes" [(visible)]="displayFormat" modal="true" width="auto" [responsive]="true">
+    <ul>
+        <li>El fichero de importación debe tener formato CSV.</li>
+        <li>La cabecera del fichero debe ser como sigue: <strong>user-name, password, dni, first-name, last-name</strong></li>
+        <li>Cada docente a crear debe estar en una fila independiente.</li>
+        <li>Todas las columnas deben estar separadas por comas tanto en las filas como en la cabecera del fichero.</li>
+    </ul>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton class="btn btn-default btn-theme" icon="fa-check" (click)="hideFormatDialog()" label="Aceptar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

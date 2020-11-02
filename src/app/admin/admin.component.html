@@ -1,0 +1,53 @@
+<div class="sidebar-wrapper">
+    <div class="welcome-message" *ngIf="loginService.isUserLoggedIn()">
+        <h4><span class="fa fa-user" aria-hidden="true"></span>{{user.lastName}}, {{user.firstName}}</h4>
+    </div>
+    <ul class="links-wrapper tabs">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/syllabus">
+                <span class="link-icon fa fa-folder"></span> Planes de Estudios
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/course">
+                <span class="link-icon fa fa-calendar"></span> Cursos Académicos
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/subject">
+                <span class="link-icon fa fa-book" aria-hidden="true"></span> Asignaturas
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/group">
+                <span class="link-icon fa fa-users"></span> Grupos
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/students">
+                <span class="link-icon fa fa-graduation-cap"></span> Estudiantes
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/studentGroup">
+                <span class="link-icon fa fa-user-plus"></span> Asignación de Estudiantes a Grupos
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/teachers">
+                <span class="link-icon fa fa-pencil"></span> Docentes
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/teacherGroup">
+                <span class="link-icon fa fa-user-plus"></span> Asignación de Docentes a Grupos
+            </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a routerLink="/session">
+                <span class="link-icon fa fa-calendar-times-o"></span> Sesiones
+            </a>
+        </li>
+    </ul>
+    <img class="logo" src="/assets/logo.png">
+</div>
